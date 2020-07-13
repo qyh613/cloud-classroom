@@ -57,7 +57,7 @@
         name: "CourseIntroduce",
         data() {
             return {
-                activeName: 'third',
+                activeName: 'first',
                 reveal: -1
             };
         },
