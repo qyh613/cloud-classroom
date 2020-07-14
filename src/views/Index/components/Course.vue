@@ -25,7 +25,7 @@
 // 课程分类
     import {
         getCourse
-    } from "../../api/classroom-api";
+    } from "../../../api/classroom-api";
 
     export default {
         name: "Course",

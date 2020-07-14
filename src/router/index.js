@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 Vue.use(VueRouter)
 
 //导入首页显示 ************************888
-import Index from "../layout/Index";
-import Course from "../layout/Course";
+import Course from "../views/Course/Course";
+import IndexLayout from "../layout/Index/IndexLayout";
+import Index from "../views/Index/Index";
+import OtherLayout from "../layout/Other/OtherLayout";
+import Play from "../views/Course/Play";
+import ShoppingCart from "../views/Course/ShoppingCart";
 
 
 let routes;
@@ -15,11 +20,29 @@ routes = [
     },
     {
         path: '/index',
-        component: Index
+        component: IndexLayout,
+        children: [{
+            path: '',
+            component: Index,
+        },
+
+        ]
     },
     {
         path: '/course/:courseId',
-        component: Course
+        component: OtherLayout,
+        children: [{
+            path: '',
+            component: Course,
+        }, {
+            path: '/course1/play/:courseId',
+            component: Play,
+        }, {
+            path: '/other/shopping-cart',
+            component: ShoppingCart,
+        },
+
+        ]
     },
     // {
     //   path: '/about',

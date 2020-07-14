@@ -2,7 +2,7 @@
     <div class="MainBody">
         <div class="content">
             <div class="IndexLink">
-                <router-link to="./index" tag="a">
+                <router-link to="/index" tag="a">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-shouye"></use>
                     </svg>

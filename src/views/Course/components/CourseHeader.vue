@@ -1,16 +1,15 @@
 <template>
     <header>
         <div class="header-top">
-            <img src="../../assets/images/tl-logo.png" alt="">
+            <img src="../../../assets/images/tl-logo.png" class="ImgLogo" alt="">
             <div class="nav">
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="1">首页</el-menu-item>
+                    <router-link tag="li" index="1" class="el-menu-item" to="/index">首页</router-link>
                     <el-submenu index="2">
                         <template slot="title" class="k1">课程分类</template>
                         <el-menu-item index="2-1">选项1</el-menu-item>
                         <el-menu-item index="2-2">选项2</el-menu-item>
                         <el-menu-item index="2-3">选项3</el-menu-item>
-
                     </el-submenu>
                     <el-menu-item index="3">专属课程</el-menu-item>
                 </el-menu>
@@ -20,26 +19,37 @@
                 <button icon="el-icon-search"><i class="el-icon-search"></i>搜索</button>
             </div>
             <div class="logIn">
-                <span class="shopping">
+                <router-link to="/other/shopping-cart" tag="span" class="shopping">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-gouwuche"></use>
                     </svg>
-                </span>
-                <span class="loginbtn">登录/注册</span>
-                <span class="user">
+                </router-link>
+                <span class="loginbtn" v-if="!isLogin" @click="showLogInModel">登录/注册</span>
+                <span class="loginbtn" v-if="isLogin">{{userInfo.nickname}}</span>
+                <span class="user" v-if="!isLogin">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-yonghufangkeshu-copy"></use>
                     </svg>
                 </span>
+                <span class="user" v-if="isLogin">
+                    <img :src="userInfo.avatarUrl" alt="">
+                </span>
             </div>
         </div>
+        <LogIn />
     </header>
 </template>
 
 <script>
     // 头部
+    import LogIn from "../../../layout/components/LogIn";
+    import {mapState} from "vuex";
+
     export default {
         name: "Header",
+        components:{
+          LogIn
+        },
         data() {
             return {
                 input: '',
@@ -47,28 +57,36 @@
                 activeIndex2: '1',
             }
         },
+        computed: {
+            ...mapState(["isLogin", "userInfo"])
+        },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            showLogInModel() {
+                this.$store.commit("changLoginModelVisible", {isShow: true})
             }
         }
+
     }
 </script>
 
 
 <style scoped lang="less">
     header {
-        min-width: 1200px;
-        max-width: 1200px;
-        height: 80px;
-        margin: 0 auto;
+        border-bottom: 1px solid #f2f2f2;
 
         .header-top {
+            margin: 0 auto;
+
+            min-width: 1200px;
+            max-width: 1200px;
             width: 100%;
             height: 80px;
             overflow: hidden;
 
-            img {
+            .ImgLogo {
                 height: 55px;
                 margin: 16px 0 0;
                 float: left;
@@ -80,7 +98,7 @@
                 float: left;
                 margin: 30px 30px 0 40px;
 
-                .el-menu--horizontal>.el-menu-item.is-active {
+                .el-menu--horizontal > .el-menu-item.is-active {
                     border-bottom: 0;
                     color: #000;
                 }
@@ -91,18 +109,22 @@
                     color: #000;
 
                 }
-               /deep/ .el-submenu__title {
+
+                /deep/ .el-submenu__title {
                     font-size: 16px;
-                        padding: 0 10px;
+                    padding: 0 10px;
                     color: #000;
 
                 }
+
                 .el-menu {
                     border-bottom: 0;
+
                     .el-menu-item {
-                        transform:none;
+                        transform: none;
                         border: 0;
                     }
+
                     li {
                         height: 30px;
                         line-height: 30px;
@@ -111,11 +133,13 @@
                             height: 30px;
                             line-height: 30px;
                         }
-                        /deep/ li:hover{
+
+                        /deep/ li:hover {
                             color: #1da57a !important;
                         }
                     }
                 }
+
                 /* .el-menu--horizontal .el-menu-item:not(.is-disabled):hover{
                     color: #1da57a !important;
                 } */
@@ -171,11 +195,11 @@
             }
 
             .logIn {
-                padding: 26px 0 0;
-                height: 100%;
-                float: right;
+                margin-top: 32px;
                 text-align: center;
+                float: right;
                 margin-right: 100px;
+                line-height: 32px;
 
                 &:hover {
                     cursor: pointer;
@@ -202,9 +226,19 @@
                 }
 
                 .user {
+                    width: 32px;
+                    height: 32px;
                     font-size: 30px;
                     vertical-align: middle;
                     margin-left: 5px;
+                    display: block;
+                    float: right;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
                 }
             }
         }

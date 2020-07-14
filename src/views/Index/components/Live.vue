@@ -4,7 +4,7 @@
         <h3>直播课程</h3>
         <el-tabs :tab-position="tabPosition" style="height: 350px;">
             <el-tab-pane label="研究生复试之高效准备简历的方法">
-                <img src="../../assets/images/直播1.png">
+                <img src="../../../assets/images/直播1.png">
                 <div class="shade">
                     <div class="bt">研究生复试之高效准备简历的方法</div>
                     <div class="state">
@@ -19,7 +19,7 @@
 
             <el-tab-pane label="十大经典排序之Part-6-完结篇">
 
-                <img src="../../assets/images/直播2.jpg">
+                <img src="../../../assets/images/直播2.jpg">
                 <div class="shade">
                     <div class="bt">十大经典排序之Part-6-完结篇</div>
                     <div class="state">
@@ -34,7 +34,7 @@
             </el-tab-pane>
 
             <el-tab-pane label="jdk1.8-新特性之函数式接口与方法引用">
-                <img src="../../assets/images/直播3.png">
+                <img src="../../../assets/images/直播3.png">
                 <div class="shade">
                     <div class="bt">jdk1.8-新特性之函数式接口与方法引用</div>
                     <div class="state">
@@ -48,7 +48,7 @@
             </el-tab-pane>
 
             <el-tab-pane label="高考之殇与痛则思变">
-                <img src="../../assets/images/直播4.png">
+                <img src="../../../assets/images/直播4.png">
                 <div class="shade">
                     <div class="bt">高考之殇与痛则思变</div>
                     <div class="state">

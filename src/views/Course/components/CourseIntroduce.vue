@@ -19,26 +19,37 @@
                 <div class="pl">
                     <p>评论</p>
                     <ul class="clearfix">
-                        <li><svg class="icon" aria-hidden="true">
+                        <li>
+                            <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-xingxing2"></use>
-                            </svg></li>
-                        <li><svg class="icon" aria-hidden="true">
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-xingxing2"></use>
-                            </svg></li>
-                        <li><svg class="icon" aria-hidden="true">
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-xingxing2"></use>
-                            </svg></li>
-                        <li><svg class="icon" aria-hidden="true">
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-xingxing2"></use>
-                            </svg></li>
-                        <li><svg class="icon" aria-hidden="true">
+                            </svg>
+                        </li>
+                        <li>
+                            <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-xingxing2"></use>
-                            </svg></li>
+                            </svg>
+                        </li>
                         <li><span>非常好</span></li>
                     </ul>
                 </div>
-                <div class="textk clearfix"><textarea placeholder="请发表您对课程的评价"></textarea><button
-                        class="btn1">发布评论</button></div>
+                <div class="textk"><textarea placeholder="请发表您对课程的评价"></textarea>
+                    <button class="btn1">发布评论</button>
+                </div>
                 <hr>
                 <div v-for="(item,index) in comments" :key="index">
                     <div class="name">{{item.user.nickname}}</div>
@@ -53,17 +64,21 @@
 
 <script>
     // 课程介绍
+    import {getComments, getCourseDetails} from "../../../api/classroom-api";
+
     export default {
         name: "CourseIntroduce",
         data() {
             return {
                 activeName: 'first',
-                reveal: -1
+                reveal: -1,
+                CourseData: {},
+                comments: []
             };
         },
         props: {
-            CourseData: [Object],
-            comments: [Array]
+            // CourseData: [Object],
+            // comments: [Array]
 
         },
         methods: {
@@ -75,7 +90,13 @@
             }
         },
         created() {
-            console.log(this.CourseData)
+            // console.log(this.CourseData)
+            getCourseDetails(this.$route.params.courseId).then(res => {
+                this.CourseData = res.data
+            })
+            getComments(this.$route.params.courseId).then(res => {
+                this.comments = res.rows
+            })
         },
     }
 </script>
@@ -122,7 +143,7 @@
         }
     }
 
-    /deep/.el-tabs__content {
+    /deep/ .el-tabs__content {
         padding: 0 30px 30px;
     }
 
@@ -144,8 +165,7 @@
                     span {
                         margin-left: 10px;
                         font-size: 14px;
-                        color: rgba(0, 0, 0, 0.65);
-                        ;
+                        color: rgba(0, 0, 0, 0.65);;
                     }
                 }
             }
@@ -187,6 +207,7 @@
         .name {
             height: 32px;
         }
+
         .CommentsContent {
             padding: 10px 0px 10px 40px;
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import {getSwiper} from "../../api/classroom-api";
+    import {getSwiper} from "../../../api/classroom-api";
 
     export default {
         name: "Swiper",

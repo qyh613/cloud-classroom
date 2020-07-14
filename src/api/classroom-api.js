@@ -38,6 +38,16 @@ export function getComments (courseId){
     return request.get(`/api/pc/comment/commentList/course/${courseId}`)
 }
 
+//播放界面切换章节的接口
+export function switchChapters(sectionId){
+    const url =`/api/weChat/applet/course/switch/section/${sectionId}`;
+    return request.get(url).then(res=>{
+        return {
+            ...res,
+        }
+    })
+}
+
 
 
 

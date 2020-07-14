@@ -20,7 +20,7 @@
 <script>
     // 头条精选
 
-    import {getHeadlines} from "../../api/classroom-api";
+    import {getHeadlines} from "../../../api/classroom-api";
 
     export default {
         name: "Course",

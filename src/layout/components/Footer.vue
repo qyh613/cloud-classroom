@@ -14,7 +14,7 @@
 <script>
     import {
         getFooter
-    } from "../api/classroom-api";
+    } from "../../api/classroom-api";
 
     export default {
         name: "Footer",
