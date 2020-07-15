@@ -23,6 +23,7 @@
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-gouwuche"></use>
                     </svg>
+                    <span v-if="isLogin" class="number">{{shoplength}}</span>
                 </router-link>
                 <span class="loginbtn" v-if="!isLogin" @click="showLogInModel">登录/注册</span>
                 <span class="loginbtn" v-if="isLogin">{{userInfo.nickname}}</span>
@@ -36,19 +37,19 @@
                 </span>
             </div>
         </div>
-        <LogIn />
+        <LogIn/>
     </header>
 </template>
 
 <script>
     // 头部
     import LogIn from "../../../layout/components/LogIn";
-    import {mapState} from "vuex";
+    import {mapGetters, mapState} from "vuex";
 
     export default {
         name: "Header",
-        components:{
-          LogIn
+        components: {
+            LogIn
         },
         data() {
             return {
@@ -58,7 +59,8 @@
             }
         },
         computed: {
-            ...mapState(["isLogin", "userInfo"])
+            ...mapState(["isLogin", "userInfo"]),
+            ...mapGetters(["shoplength"])
         },
         methods: {
             handleSelect(key, keyPath) {
@@ -200,7 +202,7 @@
                 float: right;
                 margin-right: 100px;
                 line-height: 32px;
-
+                position: relative;
                 &:hover {
                     cursor: pointer;
                 }
@@ -210,7 +212,19 @@
                     vertical-align: middle;
 
                 }
-
+                .number {
+                    font-size: 12px;
+                    width: 15px;
+                    height: 15px;
+                    display: block;
+                    position: absolute;
+                    top: 0px;
+                    left: 10px;
+                    color: #fff;
+                    background-color: #f00;
+                    border-radius: 30px;
+                    line-height: 15px;
+                }
                 .shopping::after {
                     content: '';
                     display: inline-block;

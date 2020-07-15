@@ -32,7 +32,6 @@
                     <el-tag>{{item.course.discountDesc}}</el-tag>
                 </li>
                 <li>
-
                     <i class="el-icon-delete" @click="delShop(item.shoppingCartId)"></i>
                 </li>
             </ul>
@@ -62,6 +61,7 @@
         created() {
             goodsList().then(res => {
                 this.list = res.shoppingCartList
+                this.$store.commit("shoppingCartQuantity1", {shoppingCartQuantity:res.shoppingCartList})
             })
         },
         data() {
@@ -106,9 +106,9 @@
                         // 刷新购物车列表
                         goodsList().then(res => {
                             this.list = res.shoppingCartList
+                            this.$store.commit("shoppingCartQuantity1", {shoppingCartQuantity:res.shoppingCartList})
                         })
                     }
-
                 })
             },
             handleCheckAllChange(val) {

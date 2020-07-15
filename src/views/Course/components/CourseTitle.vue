@@ -97,6 +97,7 @@
                 });
                 joinGoods(this.$route.params.courseId).then(res=>{
                     console.log(res)
+                    this.$store.dispatch("goodsList")
                 })
             },
             collection(){

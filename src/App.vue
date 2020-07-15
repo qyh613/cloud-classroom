@@ -16,10 +16,10 @@
                 if(res.code==0){
                     this.$store.commit("IsLogIn", {isLogin: true})
                     this.$store.commit("userInfo", {userInfo: res.userInfo})
-
                 }
-
             })
+
+            this.$store.dispatch("goodsList")
         }
     }
 </script>

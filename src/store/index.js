@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {userInformation} from "../api/user-api";
+// import request from "../utils/http";
+import {goodsList} from "../api/shoppingCart-api";
 
 
 Vue.use(Vuex)
@@ -9,7 +11,7 @@ export default new Vuex.Store({
     state: {
         loginModelVisible: false,
         isLogin: false,
-        userInfo: {},
+        shoppingCartQuantity: []
     },
     mutations: {
         changLoginModelVisible(state, {isShow}) {
@@ -20,6 +22,9 @@ export default new Vuex.Store({
         },
         userInfo(state, {userInfo}) {
             state.userInfo = userInfo
+        },
+        shoppingCartQuantity1(state, payload) {
+            state.shoppingCartQuantity = payload.shoppingCartQuantity
         }
     },
     actions: {
@@ -35,6 +40,16 @@ export default new Vuex.Store({
 
             })
         },
+        goodsList(context) {
+            return goodsList().then(res => {
+                context.commit("shoppingCartQuantity1", {shoppingCartQuantity: res.shoppingCartList})
+            })
+        }
     },
-    modules: {}
+    modules: {},
+    getters: {
+        shoplength: state => {
+            return state.shoppingCartQuantity.length
+        }
+    }
 })
